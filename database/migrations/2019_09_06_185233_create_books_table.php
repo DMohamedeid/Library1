@@ -18,7 +18,7 @@ class CreateBooksTable extends Migration
             $table->string('name');
             $table->string('author');
             $table->text('info')->nullable();
-            $table->string('image');
+            $table->string('image')->default('default .jpg');
             $table->string('bookFile');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

@@ -43,6 +43,7 @@ Route::namespace('Category')->group(function(){
 
 Route::namespace('Book')->group(function(){
    Route::resource('/book' , 'BookController');
+    Route::get('/search' , 'BookController@search')->name('search');
 });
 
 //Route::namespace('Comment')->group(function() {

@@ -16,7 +16,7 @@ class BookController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['AuthorRole' , 'auth' ])->except('index' , 'show');
+        $this->middleware(['AuthorRole' , 'auth' ])->except('index' , 'show' , 'search');
     }
 
 
@@ -168,5 +168,15 @@ class BookController extends Controller
             return redirect(route('book.index'))->with('msg', 'The Book Has Deleted Successfully !!');
         }
         return back()->with('error' , 'You Are Not The authorized author');
+    }
+
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $books = Book::where('name' , 'like' , "%$search%")->paginate(10);
+
+        return view('Book.searchResult' ,compact('books'));
     }
 }

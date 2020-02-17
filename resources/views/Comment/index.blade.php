@@ -22,7 +22,7 @@
                                 <div class="col-md-12  col-md-offset-1">
                                     <div class="float-right">
 
-                                         @if(Auth::user()->id == $comment->user_id)
+                                        @auth()
 
                                         <div class="dropdown notification-list">
                                             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -56,7 +56,7 @@
                                             </div>
                                         </div>
 
-                                        @endif
+                                        @endauth
 
                                         {{-- Edit Model--}}
                                         <div class="modal fade" id="editcomment" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">

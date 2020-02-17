@@ -7,12 +7,12 @@
     <!-- Topbar Start -->
     <div class="navbar-custom">
         <ul class="list-unstyled topnav-menu float-right mb-0">
-{{--            Search area--}}
+            {{--            Search area--}}
             <li class="d-none d-sm-block">
-                <form class="app-search">
+                <form action="{{route('search')}}" method="get" class="app-search">
                     <div class="app-search-box">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="search....">
+                            <input type="text" name="search" id = "search"  value="{{request()->input('search')}}" class="form-control" placeholder="search....">
                             <div class="input-group-append">
                                 <button class="btn" type="submit">
                                     <i class="fe-search"></i>
@@ -23,7 +23,7 @@
                 </form>
             </li>
 
-{{--            End of search area--}}
+            {{--            End of search area--}}
 
             @guest
                 <li class="nav-item">

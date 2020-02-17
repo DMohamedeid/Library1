@@ -28,11 +28,13 @@ class AppServiceProvider extends ServiceProvider
 
         $categories= Category::all();
 
-        view()->share('categories' ,$categories);
+//        view()->share('categories' ,$categories);
+
+        // another way of view share
 //        view::share('categories' , $categories);
 
-//        view::Composer('*' , function ($view){
-//            $view->with('categories' , Category::all() );
-//        });
+        view::Composer('*' , function ($view){
+            $view->with('categories' , Category::all() );
+        });
     }
 }
