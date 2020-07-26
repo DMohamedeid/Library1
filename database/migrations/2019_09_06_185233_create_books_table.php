@@ -20,6 +20,7 @@ class CreateBooksTable extends Migration
             $table->text('info')->nullable();
             $table->string('image')->default('default .jpg');
             $table->string('bookFile');
+            $table->string('bookRead')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');

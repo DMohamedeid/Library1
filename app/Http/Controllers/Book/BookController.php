@@ -6,6 +6,7 @@ use App\Book;
 use App\Comment;
 use Auth;
 use App\Category;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
@@ -72,8 +73,13 @@ class BookController extends Controller
 
         if ($request->hasFile('bookFile')){
             $book = $request->file('bookFile');
-            $bookName = time() . '.' . $book->getClientOriginalExtension();
-            $request->file('bookFile')->storeAs('storage/Book/PDF' , $bookName);
+            $bookName =  time() . ' ' .$book->getClientOriginalName();
+            $bookRead =  time();
+            $request->file('bookFile')->storeAs('Book/PDF' , $bookName);
+            $request->file('bookFile')->storeAs('Book/PDF/Read' , $bookRead);
+        }else {
+            $bookName = 'No-Books' ;
+            $bookRead = 'No-Books';
         }
 
         $book = new Book();
@@ -83,6 +89,7 @@ class BookController extends Controller
         $book->info = $request->input('info');
         $book->image = $imageName;
         $book->bookFile = $bookName;
+        $book->bookRead = $bookRead;
         $book->user_id = Auth::user()->id;
         $book->category_id = $request->input('category');
 
@@ -169,7 +176,6 @@ class BookController extends Controller
         }
         return back()->with('error' , 'You Are Not The authorized author');
     }
-
 
     public function search(Request $request)
     {

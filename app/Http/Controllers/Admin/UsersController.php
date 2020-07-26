@@ -18,8 +18,24 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+            if ($request->ajax()) {
+                $data = User::latest()->get();
+                return Datatables::of($data)
+
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+
+                        $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])->make(true);
+            }
+//            return view('users');
+
+
+
         $users = User::paginate(10);
         $count = User::count();
         return view('Admin.users' , compact('users' , 'count'));

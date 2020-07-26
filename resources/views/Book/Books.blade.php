@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <label class="col-form-label"> Book Name  : {{$book->name}}</label><br>
                             <label class="col-form-label"> Author  : {{$book->author}}</label><br>
-                            <a href="#" class="btn btn-info"> <i class="fa fa-book-open"> Read </i> </a>
+                            <a href="{{asset('/storage/Book/PDF/Read/' . $book->bookRead)}}" target="_blank" class="btn btn-info"> <i class="fa fa-book-open"> Read </i> </a>
                             <a href="{{asset('/storage/Book/PDF/' . $book->bookFile)}}" class="btn btn-bordred-dark float-right"> <i class="fa fa-download"> Download </i></a>
                         </div>
                     </div>

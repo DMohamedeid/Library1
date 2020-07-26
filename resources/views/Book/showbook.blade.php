@@ -26,6 +26,8 @@
                     <a href="{{route('book.edit' , $book->id)}}" class="btn btn-primary float-right"> <i class="fas fa-edit"></i> Edit</a>
                         @endif
                         @endhasRole
+<!-- button for edit using modal -->
+
 {{--                    <!-- Button trigger modal -->--}}
 {{--                    <button type="button" class="btn btn-primary float-right"--}}
 {{--                            data-toggle="modal"--}}
@@ -40,35 +42,8 @@
 {{--                        <i class="fas fa-edit"></i>  Edit--}}
 {{--                    </button>--}}
 
-{{--                     Edit Model--}}
-                    <div class="modal fade" id="editbook" tabindex="-1" role="dialog" aria-labelledby="editbook" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"> Edit The Category</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{{route('book.update', $book->id)}}" method="post" >
-                                    <div class="modal-body">
-                                        @method('PATCH')
-                                        @csrf
-{{--                                        <input type="hidden" name="bookid" id="book_id" value="">--}}
-                                        @include('Book.form')
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
 
-{{--                    End Of Edit model--}}
-
-
+<!-- Display the information of the Book -->
                 </div>
                 <div class="mt-4 mb-4">
                     <span class="font-24 font-weight-bolder " style="color: black ;"  > Book Name </span>
@@ -109,6 +84,8 @@
                 </div>
             @endif
             @endhasRole
+
+
             <!-- Modal for Delete Book -->
             <div class="modal fade" id="deletebook" tabindex="-1" role="dialog" aria-labelledby="deletebook" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -141,7 +118,7 @@
         @include('Comment.index')
     </div>
 
-    <!-- Modal -->
+    <!-- PDF Modal -->
     <div class="modal fade" id="pdf-Modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -152,7 +129,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <embed  src="{{$book->bookFile ??'No Book Available Right Now'}}" width="1110px" height="1000px" />
+                    <embed  src="{{asset('/storage/Book/PDF/Read/' . $book->bookRead)}}" width="1110px" height="1000px" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -160,4 +137,33 @@
             </div>
         </div>
     </div>
+
+
+    {{--                     Edit Model--}}
+    {{--                    <div class="modal fade" id="editbook" tabindex="-1" role="dialog" aria-labelledby="editbook" aria-hidden="true">--}}
+    {{--                        <div class="modal-dialog" role="document">--}}
+    {{--                            <div class="modal-content">--}}
+    {{--                                <div class="modal-header">--}}
+    {{--                                    <h5 class="modal-title" id="exampleModalLabel"> Edit The Category</h5>--}}
+    {{--                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+    {{--                                        <span aria-hidden="true">&times;</span>--}}
+    {{--                                    </button>--}}
+    {{--                                </div>--}}
+    {{--                                <form action="{{route('book.update', $book->id)}}" method="post" >--}}
+    {{--                                    <div class="modal-body">--}}
+    {{--                                        @method('PATCH')--}}
+    {{--                                        @csrf--}}
+    {{--                                        <input type="hidden" name="bookid" id="book_id" value="">--}}
+    {{--                                        @include('Book.form')--}}
+    {{--                                    </div>--}}
+    {{--                                    <div class="modal-footer">--}}
+    {{--                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+    {{--                                        <button type="submit" class="btn btn-primary">Save Changes</button>--}}
+    {{--                                    </div>--}}
+    {{--                                </form>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+
+    {{--                    End Of Edit model--}}
 @stop
